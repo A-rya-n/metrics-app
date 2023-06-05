@@ -8,10 +8,12 @@ app.use(express.json());
 
 app.get("/cpu", async (req, res) => {
   try {
-    const data = si.currentLoad();
+    const data = await si.currentLoad();
+    const timeStamp = new Date().toLocaleTimeString();
     const metrics = {
-      load: (await data).currentLoad,
-      idle: (await data).currentLoadIdle,
+      timeStamp,
+      load: data.currentLoad.toFixed(2),
+      idle: data.currentLoadIdle.toFixed(2),
     };
     res.json(metrics);
   } catch (error) {
