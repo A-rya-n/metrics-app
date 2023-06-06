@@ -14,7 +14,7 @@ const SideBar = () => {
       <div className="flex m-2">
         <button
           className={`w-fit h-fit px-10 py-1 rounded-lg shadow-lg mx-auto text-2xl font-medium font-sans ${
-            mode ? "bg-black text-white" : "bg-slate-500"
+            mode ? "bg-blue-400 text-white" : "bg-slate-500"
           }`}
           value="dashboard"
           onClick={handleClick}
@@ -25,7 +25,7 @@ const SideBar = () => {
       <div className="flex m-2">
         <button
           className={`w-fit h-fit px-10 py-1 rounded-lg shadow-lg mx-auto text-2xl font-medium font-sans ${
-            mode ? "bg-black text-white" : "bg-slate-500"
+            mode ? "bg-blue-400 text-white" : "bg-slate-500"
           }`}
           value="cpu"
           onClick={handleClick}
@@ -36,7 +36,7 @@ const SideBar = () => {
       <div className="flex m-2">
         <button
           className={`w-fit h-fit px-10 py-1 rounded-lg shadow-lg mx-auto text-2xl font-medium font-sans ${
-            mode ? "bg-black text-white" : "bg-slate-500"
+            mode ? "bg-blue-400 text-white" : "bg-slate-500"
           }`}
           value="memory"
           onClick={handleClick}

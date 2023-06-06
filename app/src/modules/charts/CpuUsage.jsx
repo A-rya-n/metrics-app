@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import { fetchMetrics } from "../cpu/MetricsSlice";
 
-const LineMetricsC = () => {
+const CpuUsage = () => {
   const LData = useSelector((state) => state.metrics.data);
   const select = useSelector((state) => state.sidebar.selected);
   const mode = useSelector((state) => state.mode.selected);
@@ -41,7 +41,6 @@ const LineMetricsC = () => {
             mode ? "bg-white" : "bg-black"
           }`}
         >
-          {console.log(LData)}
           <div className="font-sans font-medium mb-5">Line Chart</div>
           {LData.length > 0 ? (
             <LineChart width={600} height={300} data={LData} syncId="LineID">
@@ -104,4 +103,4 @@ const LineMetricsC = () => {
   );
 };
 
-export default LineMetricsC;
+export default CpuUsage;
