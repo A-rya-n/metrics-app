@@ -15,6 +15,7 @@ import { fetchMetrics } from "../cpu/MetricsSlice";
 
 const LineMetrics = () => {
   const LData = useSelector((state) => state.metrics.data);
+  const select = useSelector((state) => state.sidebar.selected);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,7 +28,9 @@ const LineMetrics = () => {
     };
   }, [dispatch]);
 
-  const loadLimit = 20;
+  if (select !== "cpu") {
+    return null;
+  }
 
   return (
     <div>
