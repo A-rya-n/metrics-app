@@ -22,6 +22,23 @@ app.get("/cpu", async (req, res) => {
   }
 });
 
+app.get("/Scpu", async (req, res) => {
+  try {
+    const cpu = await si.cpu();
+    const temp = await si.cpuTemperature();
+    const cpuMetrics = {
+      speed: cpu.speed,
+      cores: cpu.cores,
+      tempreture: temp.main,
+      performance: cpu.performanceCores,
+    };
+    res.json(cpuMetrics);
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    res.status(500).json({ error: "Failed to fetch CPU metrics" });
+  }
+});
+
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
