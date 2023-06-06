@@ -13,9 +13,10 @@ import {
 } from "recharts";
 import { fetchMetrics } from "../cpu/MetricsSlice";
 
-const LineMetrics = () => {
+const LineMetricsC = () => {
   const LData = useSelector((state) => state.metrics.data);
   const select = useSelector((state) => state.sidebar.selected);
+  const mode = useSelector((state) => state.mode.selected);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +36,11 @@ const LineMetrics = () => {
   return (
     <div>
       <div className="flex flex-wrap gap-10">
-        <div className="w-auto h-auto bg-black p-5 rounded-xl shadow-xl ml-5">
+        <div
+          className={`w-auto h-auto p-5 rounded-xl shadow-xl ml-5 ${
+            mode ? "bg-white" : "bg-black"
+          }`}
+        >
           {console.log(LData)}
           <div className="font-sans font-medium mb-5">Line Chart</div>
           {LData.length > 0 ? (
@@ -64,7 +69,11 @@ const LineMetrics = () => {
             </LineChart>
           ) : null}
         </div>
-        <div className="w-auto h-auto bg-black p-5 rounded-xl shadow-xl">
+        <div
+          className={`w-auto h-auto p-5 rounded-xl shadow-xl ml-5 ${
+            mode ? "bg-white" : "bg-black"
+          }`}
+        >
           <div className="font-sans font-medium mb-5">Area Chart</div>
           {LData.length > 0 ? (
             <AreaChart width={600} height={300} data={LData} syncId="lineID">
@@ -95,4 +104,4 @@ const LineMetrics = () => {
   );
 };
 
-export default LineMetrics;
+export default LineMetricsC;
