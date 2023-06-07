@@ -2,9 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const si = require("systeminformation");
 const app = express();
+const WebSocket = require("ws");
 
 app.use(cors());
 app.use(express.json());
+const wss = new WebSocket.Server({ port: 8080 });
 
 app.get("/cpu", async (req, res) => {
   try {
