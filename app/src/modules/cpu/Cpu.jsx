@@ -9,8 +9,6 @@ const Cpu = () => {
   const SData = useSelector((state) => state.smetrics.data);
   const dispatch = useDispatch();
 
-  console.log(select);
-
   useEffect(() => {
     dispatch(fetchSMetrics());
     const interval = setInterval(() => {
@@ -29,7 +27,10 @@ const Cpu = () => {
 
   return (
     <div className="flex flex-col gap-4 w-full h-full">
-      <div className="w-full h-1/6 flex gap-4">
+      <div className="text-2xl font-sans font-medium text-white bg-black p-2 w-fit rounded-lg shadow-xl px-4 mb-10">
+        CPU METRICS
+      </div>
+      <div className="w-full h-1/6 flex gap-4 justify-center items-center">
         <div
           className={`w-1/6 h-full rounded-lg shadow-xl flex justify-center items-center text-3xl font-medium font-sans ${
             mode ? "bg-slate-300" : "bg-black"

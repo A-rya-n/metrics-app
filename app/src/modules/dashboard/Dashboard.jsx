@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   const details = [
     { key: "cpu", value: cpu },
-    { key: "memory", value: memory },
+    { key: "Memory", value: memory },
   ];
 
   if (select !== "dashboard") {
