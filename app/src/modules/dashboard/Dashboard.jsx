@@ -11,6 +11,11 @@ const Dashboard = () => {
     dispatch(setSelected(e.currentTarget.dataset.value));
   };
 
+  const details = [
+    { key: "cpu", value: cpu },
+    { key: "memory", value: memory },
+  ];
+
   if (select !== "dashboard") {
     return null;
   }
@@ -21,24 +26,22 @@ const Dashboard = () => {
         MY DASHBOARD
       </div>
       <div className="flex grid-cols-4 gap-5 w-full h-2/5">
-        <div className="bg-slate-500 w-1/4 h-full rounded-lg shadow-xl flex flex-col gap-4 justify-center items-center">
-          <img
-            src={cpu}
-            className="w-3/4 h-3/4"
-            data-value="cpu"
-            onClick={handleClick}
-          />
-          <div className="text-2xl font-sans font-medium">CPU</div>
-        </div>
-        <div className="bg-slate-500 w-1/4 h-full rounded-lg shadow-xl flex flex-col gap-4 justify-center items-center">
-          <img
-            src={memory}
-            className="w-3/4 h-3/4"
-            value="memory"
-            onClick={handleClick}
-          />
-          <div className="text-2xl font-sans font-medium">MEMORY</div>
-        </div>
+        {details.map((detail) => (
+          <div
+            className="bg-slate-500 w-1/4 h-full rounded-lg shadow-xl flex flex-col gap-4 justify-center items-center"
+            key={detail}
+          >
+            <img
+              src={detail.value}
+              className="w-3/4 h-3/4"
+              data-value={detail.key}
+              onClick={handleClick}
+            />
+            <div className="text-2xl font-sans font-medium">
+              {detail.key.toUpperCase()}
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );
