@@ -2,11 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const si = require("systeminformation");
 const app = express();
-const WebSocket = require("ws");
+
+const http = require("http");
+const { Server } = require("socket.io");
+const socketApp = express();
 
 app.use(cors());
 app.use(express.json());
-const wss = new WebSocket.Server({ port: 8080 });
+socketApp.use(cors());
+socketApp.use(express.json());
 
 app.get("/cpu", async (req, res) => {
   try {
@@ -41,7 +45,42 @@ app.get("/Scpu", async (req, res) => {
   }
 });
 
+const server = http.createServer(socketApp);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  sendMemoryInfo(socket);
+
+  socket.on("disconnect", () => {
+    console.log("Socket disconnected.");
+  });
+});
+
+function sendMemoryInfo(socket) {
+  try {
+    setInterval(async () => {
+      const data = await si.mem();
+      memMetrics = {
+        Total: data.total,
+        Used: data.used,
+        Free: data.free,
+      };
+      socket.emit("memoryInfo", memMetrics);
+    }, 1000); // Send memory data every 1 second
+  } catch (error) {
+    console.log("Error fetching memory data:", error);
+  }
+}
+
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+server.listen(3001, () => {
+  console.log("Websocket server running on port 3001.");
 });
