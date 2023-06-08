@@ -5,6 +5,7 @@ import { setSelected } from "../sidebar/SidebarSlice";
 
 const Dashboard = () => {
   const select = useSelector((state) => state.sidebar.selected);
+  const mode = useSelector((state) => state.mode.selected);
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
@@ -28,8 +29,10 @@ const Dashboard = () => {
       <div className="flex grid-cols-4 gap-5 w-full h-2/5">
         {details.map((detail) => (
           <div
-            className="bg-slate-500 w-1/4 h-full rounded-lg shadow-xl flex flex-col gap-4 justify-center items-center"
-            key={detail}
+            className={`w-1/4 h-full rounded-lg shadow-xl flex flex-col gap-4 justify-center items-center ${
+              mode ? "bg-slate-200" : "bg-slate-500"
+            }`}
+            key={detail.key}
           >
             <img
               src={detail.value}

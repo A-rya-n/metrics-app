@@ -8,7 +8,6 @@ const SideBar = () => {
 
   const handleClick = (e) => {
     dispatch(setSelected(e.target.value));
-    console.log(e.target.value);
   };
 
   const dashboard = ["dashboard", "cpu", "Memory"];

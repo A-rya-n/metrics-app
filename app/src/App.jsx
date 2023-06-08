@@ -21,7 +21,7 @@ function App() {
       <div className="flex gap-8 h-5/6">
         <div
           className={`w-1/6 rounded-lg shadow-xl ml-3 ${
-            mode ? "bg-slate-200" : "bg-slate-400 "
+            mode ? "bg-blue-300" : "bg-slate-400 "
           }`}
         >
           {/* SideBar options . . . */}
@@ -29,7 +29,7 @@ function App() {
         </div>
         <div
           className={`w-4/5 rounded-lg shadow-xl mr-3 p-5 ${
-            mode ? "bg-slate-200" : "bg-slate-400"
+            mode ? "bg-blue-300" : "bg-slate-400"
           }`}
         >
           {/* Displaying all graphs and clickables . . . */}

@@ -69,7 +69,7 @@ const Cpu = () => {
           <div className="bg-blue-500 rounded-md shadow-lg p-1 px-3 mr-2">
             {data.tempreture}
           </div>
-          <div>C</div>
+          <div>°C</div>
         </div>
       </div>
       <div className="w-full h-3/4 flex justify-center items-center">
