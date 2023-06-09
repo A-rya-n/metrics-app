@@ -47,10 +47,10 @@ const Battery = () => {
             }`}
             key={index}
           >
-            <div className="bg-blue-500 rounded-md shadow-lg p-1 mr-2">
+            <div className="bg-blue-500 rounded-md shadow-lg p-1 m-2">
               {value}
             </div>
-            <div>{index}</div>
+            <div className="text-xl">{index} Capacity</div>
           </div>
         ))}
       </div>

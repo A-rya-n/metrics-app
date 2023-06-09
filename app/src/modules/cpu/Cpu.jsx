@@ -40,20 +40,20 @@ const Cpu = () => {
             mode ? "bg-slate-300" : "bg-slate-500"
           }`}
         >
-          <div className="bg-blue-500 rounded-md shadow-lg p-1 mr-2">
+          <div className="bg-blue-500 rounded-md shadow-lg p-1 m-2">
             {data.speed}
           </div>
-          <div>GHz</div>
+          <div className="text-xl">GHz</div>
         </div>
         <div
           className={`w-1/6 h-4/5 rounded-lg shadow-xl flex justify-center items-center text-3xl font-medium font-sans ${
             mode ? "bg-slate-300" : "bg-slate-500"
           }`}
         >
-          <div className="bg-blue-500 rounded-md shadow-lg p-1 px-3 mr-2">
+          <div className="bg-blue-500 rounded-md shadow-lg p-1 px-3 m-2">
             {data.cores}
           </div>
-          <div>Cores</div>
+          <div className="text-xl">Cores</div>
         </div>
         <div
           className={`w-1/6 h-4/5 rounded-lg shadow-xl flex flex-col items-center justify-center text-3xl font-medium font-sans ${
@@ -63,17 +63,17 @@ const Cpu = () => {
           <div className="mx-auto bg-blue-500 rounded-md shadow-lg p-1 px-3 mb-2">
             {data.performance}
           </div>
-          <div className="mx-auto text-2xl">Performance Cores</div>
+          <div className="mx-auto text-xl">Performance Cores</div>
         </div>
         <div
           className={`w-1/6 h-4/5 rounded-lg shadow-xl flex justify-center items-center text-3xl font-medium font-sans ${
             mode ? "bg-slate-300" : "bg-slate-500"
           }`}
         >
-          <div className="bg-blue-500 rounded-md shadow-lg p-1 px-3 mr-2">
+          <div className="bg-blue-500 rounded-md shadow-lg p-1 px-3 m-2">
             {data.tempreture}
           </div>
-          <div>°C</div>
+          <div className="text-xl">°C</div>
         </div>
       </div>
       <div

@@ -41,30 +41,30 @@ const Memory = () => {
             mode ? "bg-slate-300" : "bg-slate-500"
           }`}
         >
-          <div className="bg-blue-500 rounded-md shadow-lg p-1 mr-2">
+          <div className="bg-blue-500 rounded-md shadow-lg p-1 m-2">
             {(MData.Total / (1024 * 1024 * 1024)).toFixed(2)}
           </div>
-          <div>Total space</div>
+          <div className="text-xl">Total space</div>
         </div>
         <div
           className={`w-1/6 h-4/5 rounded-lg shadow-xl flex justify-center items-center text-3xl font-medium font-sans ${
             mode ? "bg-slate-300" : "bg-slate-500"
           }`}
         >
-          <div className="bg-blue-500 rounded-md shadow-lg p-1 mr-2">
+          <div className="bg-blue-500 rounded-md shadow-lg p-1 m-2">
             {(MData.Used / (1024 * 1024 * 1024)).toFixed(2)}
           </div>
-          <div>Used space</div>
+          <div className="text-xl">Used space</div>
         </div>
         <div
           className={`w-1/6 h-4/5 rounded-lg shadow-xl flex flex-col items-center justify-center text-3xl font-medium font-sans ${
             mode ? "bg-slate-300" : "bg-slate-500"
           }`}
         >
-          <div className="bg-blue-500 rounded-md shadow-lg p-1 mr-2">
+          <div className="bg-blue-500 rounded-md shadow-lg p-1 m-2">
             {(MData.Free / (1024 * 1024 * 1024)).toFixed(2)}
           </div>
-          <div>Free space</div>
+          <div className="text-xl">Free space</div>
         </div>
       </div>
       <div
