@@ -1,5 +1,8 @@
 import cpu from "../../assets/cpu-icon.svg";
 import memory from "../../assets/memory-icon.svg";
+import battery from "../../assets/battery-icon.svg";
+import gpu from "../../assets/gpu-icon.svg";
+
 import { useDispatch, useSelector } from "react-redux";
 import { setSelected } from "../sidebar/SidebarSlice";
 
@@ -13,11 +16,13 @@ const Dashboard = () => {
   };
 
   const details = [
-    { key: "cpu", value: cpu },
+    { key: "Cpu", value: cpu },
     { key: "Memory", value: memory },
+    { key: "Battery", value: battery },
+    { key: "Gpu", value: gpu },
   ];
 
-  if (select !== "dashboard") {
+  if (select !== "Dashboard") {
     return null;
   }
 
@@ -26,17 +31,17 @@ const Dashboard = () => {
       <div className="text-2xl font-sans font-medium text-white bg-black p-2 w-fit rounded-lg shadow-xl px-4 mb-10">
         MY DASHBOARD
       </div>
-      <div className="flex grid-cols-4 gap-5 w-full h-2/5">
+      <div className="flex grid-cols-4 gap-20 w-full h-2/5">
         {details.map((detail) => (
           <div
-            className={`w-1/4 h-full rounded-lg shadow-xl flex flex-col gap-4 justify-center items-center ${
+            className={`w-fit h-fit px-9 py-4 rounded-lg shadow-xl flex flex-col gap-4 justify-center items-center ${
               mode ? "bg-slate-200" : "bg-slate-500"
             }`}
             key={detail.key}
           >
             <img
               src={detail.value}
-              className="w-3/4 h-3/4"
+              className="w-48 h-48"
               data-value={detail.key}
               onClick={handleClick}
             />

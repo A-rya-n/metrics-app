@@ -10,14 +10,17 @@ const SideBar = () => {
     dispatch(setSelected(e.target.value));
   };
 
-  const dashboard = ["dashboard", "cpu", "Memory"];
+  const dashboard = ["Dashboard", "Cpu", "Memory", "Battery", "Gpu"];
 
   return (
     <div className="flex-col flex gap-4">
+      <div className="bg-black text-white w-full py-5 font-sans font-medium text-2xl pl-3">
+        CONTENT
+      </div>
       {dashboard.map((dash) => (
         <div className="flex m-2" key={dash}>
           <button
-            className={`w-fit h-fit px-10 py-1 rounded-lg shadow-lg mx-auto text-2xl font-medium font-sans hover:bg-slate-600 ${
+            className={`w-2/3 h-fit px-10 py-2 rounded-lg shadow-lg mx-auto text-2xl font-medium font-sans hover:bg-slate-600 ${
               mode ? "bg-blue-400 text-white" : "bg-slate-500"
             } ${select === dash ? "bg-blue-500" : "bg-slate-500"}`}
             value={dash.toString()}

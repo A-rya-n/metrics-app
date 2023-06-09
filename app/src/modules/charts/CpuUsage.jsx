@@ -29,10 +29,6 @@ const CpuUsage = () => {
     };
   }, [dispatch]);
 
-  if (select !== "cpu") {
-    return null;
-  }
-
   return (
     <div>
       <div className="flex flex-wrap gap-10">

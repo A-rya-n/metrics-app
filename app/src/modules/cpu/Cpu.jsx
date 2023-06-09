@@ -21,7 +21,7 @@ const Cpu = () => {
 
   const data = SData[0];
 
-  if (select !== "cpu") {
+  if (select !== "Cpu") {
     return null;
   }
 
