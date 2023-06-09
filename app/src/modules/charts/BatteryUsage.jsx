@@ -23,13 +23,13 @@ const BatteryUsage = () => {
 
   const percentage = [
     { name: "Battery", value: Data[3][1] },
-    { name: "Remaining", value: 100 - Data[3][1] },
+    { name: "Battery spent", value: 100 - Data[3][1] },
   ];
 
   const barData = [
-    { name: "Original", ori: upperData[0][1] },
-    { name: "Max", ma: upperData[1][1] },
-    { name: "Current", cur: upperData[2][1] },
+    { name: "Original", original: upperData[0][1] },
+    { name: "Max", max: upperData[1][1] },
+    { name: "Current", current: upperData[2][1] },
   ];
 
   return (
@@ -89,9 +89,9 @@ const BatteryUsage = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="ori" fill="#8884d8" />
-            <Bar dataKey="ma" stackId="a" fill="#82ca9d" />
-            <Bar dataKey="cur" stackId="a" fill="#ffc658" />
+            <Bar dataKey="original" fill="#8884d8" />
+            <Bar dataKey="max" stackId="a" fill="#82ca9d" />
+            <Bar dataKey="current" stackId="a" fill="#ffc658" />
           </BarChart>
         </div>
       </div>
