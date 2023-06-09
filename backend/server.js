@@ -53,12 +53,23 @@ const io = new Server(server, {
   },
 });
 
-io.on("connection", (socket) => {
-  console.log("Socket connected");
+const memory = io.of("/memory");
+const battery = io.of("/battery");
+
+memory.on("connection", (socket) => {
+  console.log("Memory socket connected");
   sendMemoryInfo(socket);
 
   socket.on("disconnect", () => {
-    console.log("Socket disconnected.");
+    console.log("Memory socket disconnected.");
+  });
+});
+battery.on("connection", (socket) => {
+  console.log("Battery socket connected");
+  sendBatteryInfo(socket);
+
+  socket.on("disconnect", () => {
+    console.log("Battery socket disconnected.");
   });
 });
 
@@ -73,6 +84,24 @@ function sendMemoryInfo(socket) {
       };
       socket.emit("memoryInfo", memMetrics);
     }, 1000); // Send memory data every 1 second
+  } catch (error) {
+    console.log("Error fetching memory data:", error);
+  }
+}
+function sendBatteryInfo(socket) {
+  try {
+    setInterval(async () => {
+      const data = await si.battery();
+      batteryMetrics = {
+        Original: data.designedCapacity,
+        Max: data.maxCapacity,
+        Current: data.currentCapacity,
+        Percent: data.percent,
+        Time: data.timeRemaining,
+        Volt: data.voltage,
+      };
+      socket.emit("batteryInfo", batteryMetrics);
+    }, 1000); // Send battery data every 1 second
   } catch (error) {
     console.log("Error fetching memory data:", error);
   }
