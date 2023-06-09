@@ -41,7 +41,9 @@ const CpuUsage = () => {
             mode ? "bg-white" : "bg-black"
           }`}
         >
-          <div className="font-sans font-medium mb-5">Line Chart</div>
+          <div className="font-sans font-medium mb-5">
+            Line Chart - CPU Usage
+          </div>
           {LData.length > 0 ? (
             <LineChart width={600} height={300} data={LData} syncId="LineID">
               <CartesianGrid strokeDasharray="3 3" />
@@ -73,7 +75,9 @@ const CpuUsage = () => {
             mode ? "bg-white" : "bg-black"
           }`}
         >
-          <div className="font-sans font-medium mb-5">Area Chart</div>
+          <div className="font-sans font-medium mb-5">
+            Area Chart - CPU Usage
+          </div>
           {LData.length > 0 ? (
             <AreaChart width={600} height={300} data={LData} syncId="lineID">
               <CartesianGrid strokeDasharray="3 3" />

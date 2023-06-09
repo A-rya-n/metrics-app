@@ -21,7 +21,6 @@ const Memory = () => {
       socket.disconnect();
     };
   }, [dispatch]);
-  console.log(MData);
 
   if (select !== "Memory") {
     return null;

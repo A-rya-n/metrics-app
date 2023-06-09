@@ -24,7 +24,6 @@ function App() {
             mode ? "bg-blue-300" : "bg-slate-400 "
           }`}
         >
-          {/* SideBar options . . . */}
           <SideBar />
         </div>
         <div
@@ -32,7 +31,6 @@ function App() {
             mode ? "bg-blue-300" : "bg-slate-400"
           }`}
         >
-          {/* Displaying all graphs and clickables . . . */}
           <Dashboard />
           <Cpu />
           <Memory />
