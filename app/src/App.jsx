@@ -4,6 +4,7 @@ import SideBar from "./modules/sidebar/Sidebar";
 import Dashboard from "./modules/dashboard/Dashboard";
 import Cpu from "./modules/cpu/Cpu";
 import Memory from "./modules/memory/Memory";
+import Battery from "./modules/battery/Battery";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Dashboard />
           <Cpu />
           <Memory />
+          <Battery />
         </div>
       </div>
     </div>

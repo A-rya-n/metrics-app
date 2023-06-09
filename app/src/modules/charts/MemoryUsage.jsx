@@ -5,13 +5,18 @@ const COLORS = ["#00C49F", "#FFBB28"];
 
 const MemoryUsage = () => {
   const MData = useSelector((state) => state.memoryInfo.data);
+  const mode = useSelector((state) => state.mode.selected);
   const Data = Object.entries(MData);
 
   const innerPie = Data.slice(0, 1);
   const outerPie = Data.slice(1);
 
   return (
-    <div className="w-auto h-auto bg-slate-200 p-5 rounded-xl shadow-xl ml-5">
+    <div
+      className={`w-auto h-auto p-5 rounded-xl shadow-xl ml-5 ${
+        mode ? "bg-white" : "bg-black"
+      }`}
+    >
       <div className="font-sans font-medium mb-5">Pie Chart - Memory Usage</div>
       <PieChart width={450} height={350}>
         <Tooltip />

@@ -15,7 +15,6 @@ import { fetchMetrics } from "../cpu/MetricsSlice";
 
 const CpuUsage = () => {
   const LData = useSelector((state) => state.metrics.data);
-  const select = useSelector((state) => state.sidebar.selected);
   const mode = useSelector((state) => state.mode.selected);
   const dispatch = useDispatch();
 

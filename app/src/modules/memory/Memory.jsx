@@ -12,7 +12,7 @@ const Memory = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const socket = io.connect("http://localhost:3001");
+    const socket = io.connect("http://localhost:3001/memory");
     socket.on("memoryInfo", (data) => {
       dispatch(updateMemoryInfo(data));
     });

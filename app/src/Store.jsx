@@ -4,6 +4,7 @@ import sidebarReducer from "./modules/sidebar/SidebarSlice";
 import modeReducer from "./modules/header/ModeSlice";
 import smetricsReducer from "./modules/cpu/SMetricsSlice";
 import memoryReducer from "./modules/memory/MemorySlice";
+import batteryReducer from "./modules/battery/BatterySlice";
 
 const rootReducer = combineReducers({
   // All reducers of slices here...
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   mode: modeReducer,
   smetrics: smetricsReducer,
   memoryInfo: memoryReducer,
+  batteryInfo: batteryReducer,
 });
 
 const Store = configureStore({
