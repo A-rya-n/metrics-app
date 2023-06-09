@@ -19,10 +19,13 @@ const SideBar = () => {
       </div>
       {dashboard.map((dash) => (
         <div className="flex m-2" key={dash}>
+          {console.log("Dash: ", dash, " Select: ", select)}
           <button
             className={`w-2/3 h-fit px-10 py-2 rounded-lg shadow-lg mx-auto text-2xl font-medium font-sans hover:bg-slate-600 ${
-              mode ? "bg-blue-400 text-white" : "bg-slate-500"
-            } ${select === dash ? "bg-blue-500" : "bg-slate-500"}`}
+              mode
+                ? `bg-blue-400 text-white ${select === dash ? "bg-black" : ""}`
+                : `bg-slate-500 ${select === dash ? "bg-black" : ""}`
+            }`}
             value={dash.toString()}
             onClick={handleClick}
           >
