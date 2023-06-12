@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import CpuUsage from "../charts/CpuUsage";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchSMetrics } from "./SMetricsSlice";
+import { updateScpuInfo } from "./SMetricsSlice";
+import { io } from "socket.io-client";
 
 const Cpu = () => {
   const select = useSelector((state) => state.sidebar.selected);
@@ -10,16 +11,15 @@ const Cpu = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchSMetrics());
-    const interval = setInterval(() => {
-      dispatch(fetchSMetrics());
-    }, 1000);
+    const socket = io.connect("http://localhost:3001/Scpu");
+    socket.on("scpuInfo", (data) => {
+      dispatch(updateScpuInfo(data));
+    });
+
     return () => {
-      clearInterval(interval);
+      socket.disconnect();
     };
   }, [dispatch]);
-
-  const data = SData[0];
 
   if (select !== "Cpu") {
     return null;
@@ -41,7 +41,7 @@ const Cpu = () => {
           }`}
         >
           <div className="bg-blue-500 rounded-md shadow-lg p-1 m-2">
-            {data.speed}
+            {SData.speed}
           </div>
           <div className="text-xl">GHz</div>
         </div>
@@ -51,7 +51,7 @@ const Cpu = () => {
           }`}
         >
           <div className="bg-blue-500 rounded-md shadow-lg p-1 px-3 m-2">
-            {data.cores}
+            {SData.cores}
           </div>
           <div className="text-xl">Cores</div>
         </div>
@@ -61,7 +61,7 @@ const Cpu = () => {
           }`}
         >
           <div className="mx-auto bg-blue-500 rounded-md shadow-lg p-1 px-3 mb-2">
-            {data.performance}
+            {SData.performance}
           </div>
           <div className="mx-auto text-xl">Performance Cores</div>
         </div>
@@ -71,7 +71,7 @@ const Cpu = () => {
           }`}
         >
           <div className="bg-blue-500 rounded-md shadow-lg p-1 px-3 m-2">
-            {data.tempreture}
+            {SData.tempreture}
           </div>
           <div className="text-xl">°C</div>
         </div>

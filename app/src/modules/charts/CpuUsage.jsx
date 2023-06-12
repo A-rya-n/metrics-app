@@ -11,7 +11,8 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { fetchMetrics } from "../cpu/MetricsSlice";
+import { updateCpuInfo } from "../cpu/MetricsSlice";
+import { io } from "socket.io-client";
 
 const CpuUsage = () => {
   const LData = useSelector((state) => state.metrics.data);
@@ -19,14 +20,17 @@ const CpuUsage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMetrics());
-    const interval = setInterval(() => {
-      dispatch(fetchMetrics());
-    }, 1000);
+    const socket = io.connect("http://localhost:3001/cpu");
+    socket.on("cpuInfo", (data) => {
+      dispatch(updateCpuInfo(data));
+    });
+
     return () => {
-      clearInterval(interval);
+      socket.disconnect();
     };
   }, [dispatch]);
+
+  console.log(LData);
 
   return (
     <div>
