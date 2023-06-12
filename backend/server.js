@@ -1,49 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const si = require("systeminformation");
-const app = express();
 
 const http = require("http");
 const { Server } = require("socket.io");
 const socketApp = express();
 
-app.use(cors());
-app.use(express.json());
 socketApp.use(cors());
 socketApp.use(express.json());
-
-app.get("/cpu", async (req, res) => {
-  try {
-    const data = await si.currentLoad();
-    const timeStamp = new Date().toLocaleTimeString();
-    const metrics = {
-      timeStamp,
-      load: data.currentLoad.toFixed(2),
-      idle: data.currentLoadIdle.toFixed(2),
-    };
-    res.json(metrics);
-  } catch (error) {
-    console.error("Error fetching data: ", error);
-    res.status(500).json({ error: "Failed to fetch CPU metrics" });
-  }
-});
-
-app.get("/Scpu", async (req, res) => {
-  try {
-    const cpu = await si.cpu();
-    const temp = await si.cpuTemperature();
-    const cpuMetrics = {
-      speed: cpu.speed,
-      cores: cpu.cores,
-      tempreture: temp.main,
-      performance: cpu.performanceCores,
-    };
-    res.json(cpuMetrics);
-  } catch (error) {
-    console.error("Error fetching data: ", error);
-    res.status(500).json({ error: "Failed to fetch CPU metrics" });
-  }
-});
 
 const server = http.createServer(socketApp);
 const io = new Server(server, {
@@ -53,9 +17,27 @@ const io = new Server(server, {
   },
 });
 
+const cpu = io.of("/cpu");
+const scpu = io.of("/Scpu");
 const memory = io.of("/memory");
 const battery = io.of("/battery");
 
+cpu.on("connection", (socket) => {
+  console.log("Cpu socket connected");
+  sendCpuInfo(socket);
+
+  socket.on("disconnect", () => {
+    console.log("Cpu socket disconnected.");
+  });
+});
+scpu.on("connection", (socket) => {
+  console.log("Small cpu socket connected");
+  sendScpuInfo(socket);
+
+  socket.on("disconnect", () => {
+    console.log("Small cpu socket disconnected.");
+  });
+});
 memory.on("connection", (socket) => {
   console.log("Memory socket connected");
   sendMemoryInfo(socket);
@@ -73,6 +55,40 @@ battery.on("connection", (socket) => {
   });
 });
 
+function sendCpuInfo(socket) {
+  try {
+    setInterval(async () => {
+      const data = await si.currentLoad();
+      const timeStamp = new Date().toLocaleTimeString();
+      cpuMetrics = {
+        timeStamp,
+        load: data.currentLoad.toFixed(2),
+        idle: data.currentLoadIdle.toFixed(2),
+      };
+      socket.emit("cpuInfo", cpuMetrics);
+    }, 1000); // Send memory data every 1 second
+  } catch (error) {
+    console.log("Error fetching cpu data:", error);
+  }
+}
+
+function sendScpuInfo(socket) {
+  try {
+    setInterval(async () => {
+      const data = await si.cpu();
+      const temp = await si.cpuTemperature();
+      const scpuMetrics = {
+        speed: data.speed,
+        cores: data.cores,
+        tempreture: temp.main,
+        performance: data.performanceCores,
+      };
+      socket.emit("scpuInfo", scpuMetrics);
+    }, 1000); // Send memory data every 1 second
+  } catch (error) {
+    console.log("Error fetching small cpu data:", error);
+  }
+}
 function sendMemoryInfo(socket) {
   try {
     setInterval(async () => {
@@ -107,10 +123,6 @@ function sendBatteryInfo(socket) {
   }
 }
 
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 server.listen(3001, () => {
   console.log("Websocket server running on port 3001.");
 });
