@@ -66,7 +66,7 @@ function sendCpuInfo(socket) {
         idle: data.currentLoadIdle.toFixed(2),
       };
       socket.emit("cpuInfo", cpuMetrics);
-    }, 1000); // Send memory data every 1 second
+    }, 5000); // Send memory data every 1 second
   } catch (error) {
     console.log("Error fetching cpu data:", error);
   }
@@ -84,7 +84,7 @@ function sendScpuInfo(socket) {
         performance: data.performanceCores,
       };
       socket.emit("scpuInfo", scpuMetrics);
-    }, 1000); // Send memory data every 1 second
+    }, 5000); // Send memory data every 1 second
   } catch (error) {
     console.log("Error fetching small cpu data:", error);
   }
@@ -99,7 +99,7 @@ function sendMemoryInfo(socket) {
         Free: data.free,
       };
       socket.emit("memoryInfo", memMetrics);
-    }, 1000); // Send memory data every 1 second
+    }, 5000); // Send memory data every 1 second
   } catch (error) {
     console.log("Error fetching memory data:", error);
   }
@@ -117,7 +117,7 @@ function sendBatteryInfo(socket) {
         Volt: data.voltage,
       };
       socket.emit("batteryInfo", batteryMetrics);
-    }, 1000); // Send battery data every 1 second
+    }, 5000); // Send battery data every 1 second
   } catch (error) {
     console.log("Error fetching memory data:", error);
   }
